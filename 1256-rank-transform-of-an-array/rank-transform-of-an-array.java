@@ -1,20 +1,29 @@
 class Solution {
     public int[] arrayRankTransform(int[] arr) {
         int n=arr.length;
-        TreeMap<Integer,ArrayList<Integer>> tm=new TreeMap<>();
+        if(arr.length==0)
+        return arr;
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        int tar[]=new int[n];
         for(int i=0;i<n;i++)
-        {
-            if(!tm.containsKey(arr[i]))
-            tm.put(arr[i],new ArrayList<>());
-            tm.get(arr[i]).add(i);
-        }
+        tar[i]=arr[i];
+        Arrays.sort(tar);
         int r=1;
-        for(int i: tm.keySet())
+        hm.put(tar[0],r);
+        for(int i=1;i<n;i++)
         {
-            for(int j: tm.get(i))
-            arr[j]=r;
-            r+=1;
+            if(tar[i]==tar[i-1])
+            {
+                continue;
+            }
+            else
+            {
+                r+=1;
+                hm.put(tar[i],r);
+            }
         }
+        for(int i=0;i<n;i++)
+        arr[i]=hm.get(arr[i]);
         return arr;
     }
 }
