@@ -1,6 +1,6 @@
 class Solution {
     public List<Integer> sequentialDigits(int low, int high) {
-        int l=(int)Math.log10(low)+1,h=(int)Math.log10(high)+1;
+        int l=(int)Math.log10(low)+1,h=Math.min(9,(int)Math.log10(high)+1);
         List<Integer> ans=new ArrayList<>();
         for(int i=l;i<=h;i++)
         {
@@ -8,16 +8,16 @@ class Solution {
             int j=1;
             for(j=1;j<=i;j++)
             sb.append(j);
-            long val=Long.parseLong(sb.toString());
+            int val=Integer.parseInt(sb.toString());
             if(val>=low && val<=high)
-            ans.add((int)val);
+            ans.add(val);
             while(j<=9)
             {
                 sb.deleteCharAt(0);
                 sb.append(j);
-                val=Long.parseLong(sb.toString());
+                val=Integer.parseInt(sb.toString());
                 if(val>=low && val<=high)
-                ans.add((int)val);
+                ans.add(val);
                 j+=1;
             }
         }
