@@ -16,20 +16,20 @@ class Solution {
         int n=s.length();
         for(int i=0;i<n;i++)
         {
-            String ctmp="";
+            StringBuilder ctmp=new StringBuilder();
             int cnt=0;
             for(int j=i;j<n;j++)
             {
                 char c=s.charAt(j);
-                ctmp+=c;
+                ctmp.append(c);
                 if(c=='1')
                 cnt+=1;
                 if(cnt>=k)
                 {
                     if(tmp.equals(""))
-                    tmp=ctmp;
+                    tmp=ctmp.toString();
                     else
-                    tmp=findLexographicallySmaller(tmp,ctmp);
+                    tmp=findLexographicallySmaller(tmp,ctmp.toString());
                 }
             }
         }
