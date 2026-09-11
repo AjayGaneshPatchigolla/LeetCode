@@ -11,7 +11,7 @@ class Solution {
                     if(i!=j && j!=k && i!=k)
                     {
                         int val=digits[i]*100+digits[j]*10+digits[k];
-                        System.out.println(val);
+                        // System.out.println(val);
                         if(val%2==0 && digits[i]>0){
                         hs.add(val);
                         // System.out.println(val+"*");
