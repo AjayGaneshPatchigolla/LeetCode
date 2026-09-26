@@ -1,35 +1,50 @@
 class Solution {
+
     public String evaluate(String s, List<List<String>> knowledge) {
-        HashMap<String,String> knowledgeBase=new HashMap<>();
-        int l=s.length();
-        for(List<String> i: knowledge)
-        {
-            knowledgeBase.put(i.get(0),i.get(1));
+
+        // Store all key-value pairs in a HashMap
+        HashMap<String, String> knowledgeBase = new HashMap<>();
+
+        for (List<String> entry : knowledge) {
+            knowledgeBase.put(entry.get(0), entry.get(1));
         }
-        StringBuilder res=new StringBuilder();
-        String tmp="";
-        int cnt=-1;
-        for(int i=0;i<l;i++)
-        {
-            char c=s.charAt(i);
-            if(c=='(')
-            {
-                cnt=0;
-            }
-            else if(c==')')
-            {
-                res.append(knowledgeBase.getOrDefault(tmp,"?"));
-                tmp="";
-                cnt=-1;
-            }
-            else
-            {
-                if(cnt==-1)
-                res.append(c);
-                else
-                tmp+=c;
+
+        StringBuilder result = new StringBuilder();
+        StringBuilder currentKey = new StringBuilder();
+
+        boolean insideBracket = false;
+
+        for (char currentChar : s.toCharArray()) {
+
+            if (currentChar == '(') {
+
+                // Start reading a key
+                insideBracket = true;
+                currentKey.setLength(0);
+
+            } else if (currentChar == ')') {
+
+                // Key is complete, look it up
+                String value = knowledgeBase.getOrDefault(
+                    currentKey.toString(),
+                    "?"
+                );
+
+                result.append(value);
+
+                // Stop reading the key
+                insideBracket = false;
+
+            } else {
+
+                if (insideBracket) {
+                    currentKey.append(currentChar);
+                } else {
+                    result.append(currentChar);
+                }
             }
         }
-        return res.toString();
+
+        return result.toString();
     }
 }
