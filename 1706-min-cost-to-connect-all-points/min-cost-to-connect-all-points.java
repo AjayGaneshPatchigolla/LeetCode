@@ -72,13 +72,17 @@ class Solution {
         }
 
         DisjointSet ds=new DisjointSet(n);
+        int cnt=0;
         while(!pq.isEmpty())
         {
             Pair tmp=pq.poll();
             if(ds.union(tmp.u,tmp.v))
             {
                 res+=tmp.d;
+                cnt+=1;
             }
+            if(cnt==(n-1))
+            break;
         }
         return res;
     }
