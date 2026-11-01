@@ -77,7 +77,6 @@ class Solution {
             Pair tmp=pq.poll();
             if(ds.union(tmp.u,tmp.v))
             {
-                ds.union(tmp.u,tmp.v);
                 res+=tmp.d;
             }
         }
